@@ -3,6 +3,7 @@ $content = file_get_contents('./input.txt');
 
 $arr = explode("\r\n", $content);
 $answer1 = 0;
+$answer2 = [];
 
 foreach ($arr as $value) {
     $firstArr = substr($value, 0, 7);
@@ -16,8 +17,9 @@ foreach ($arr as $value) {
 
     $sum = $targetNum * 8 + $targetNum2;
 
-    if ($sum > $answer1)
-        $answer1 = $sum;
+    if ($sum > $answer1) $answer1 = $sum;
+
+    array_push($answer2, $sum);
 }
 
 function getPosition($input, $firstNum, $secondNum)
@@ -41,6 +43,19 @@ function getPosition($input, $firstNum, $secondNum)
     return $firstNum;
 }
 
+asort($answer2);
+$answer2 = array_values($answer2);
+$testNum = $answer2[0];
+
+foreach ($answer2 as $i => $val) {
+    if ($val == $testNum)
+        $testNum++;
+    else {
+        $answer2 = $val - 1;
+        break;
+    }
+}
+
 echo 'Part 1. answer:' . $answer1;
 echo '<br>';
-//echo 'Part 2. answer:' . $answer2;
+echo 'Part 2. answer:' . $answer2;
