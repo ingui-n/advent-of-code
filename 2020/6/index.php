@@ -7,6 +7,23 @@ $answer2 = 0;
 
 foreach ($arr as $index => $value) {
     $target = explode("\r\n", $value);
+    $testArr = [];
+
+    foreach ($target as $i => $val) {
+        if ($i == 0) {
+            $testArr = str_split($val);
+        } else {
+            $a = str_split($val);
+            $a = array_intersect($a, $testArr);
+            if (empty($a)) {
+                $testArr = [];
+                break;
+            }
+            $testArr = $a;
+        }
+    }
+    $answer2 += count($testArr);
+
     $target = implode('', $target);
     $target = str_split($target);
     $target = array_unique($target);
@@ -15,6 +32,7 @@ foreach ($arr as $index => $value) {
 
     $answer1 += count($target);
 }
+$answer2--;
 
 echo 'Part 1. answer:' . $answer1;
 echo '<br>';
