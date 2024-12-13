@@ -1,2 +1,7 @@
 .idea
+
 in
+
+target/
+debug/
+Cargo.lock
